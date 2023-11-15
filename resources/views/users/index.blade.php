@@ -1,5 +1,4 @@
 @extends('Layouts.app')
-
 @section('content')
 <div class="container">
 <table class="table table-striped">
@@ -21,11 +20,20 @@
             <td>{{  $user -> name  }}</td>
             <td>{{  $user -> surname  }}</td>
             <td>{{  $user -> phone_number  }}</td>
-            <td></td>
+            <td>
+                <button class="btn btn-danger btn-sn">X</button>
+            </td>
          </tr>
     @endforeach
   </tbody>
 </table>
 {{ $users->links() }}
 </div>
+@endsection
+@section('javascript')
+<script type="module">
+        $("button").click(function(){
+            alert("Thanks");
+        });
+    </script>
 @endsection
