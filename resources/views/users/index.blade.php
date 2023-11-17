@@ -30,10 +30,10 @@
 {{ $users->links() }}
 </div>
 @endsection
-@section('javascript')
-<script type="module">
-        $("button").click(function(){
-            alert("Thanks");
-        });
-    </script>
+@section('scripts')
+$(function(){
+  $('.delete').click(function(){
+      alert('click!!!!');
+   });
+});
 @endsection
