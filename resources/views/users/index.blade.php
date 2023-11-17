@@ -31,9 +31,11 @@
 </div>
 @endsection
 @section('scripts')
+
 $(function(){
-  $('.delete').click(function(){
+  $("button").on("click",function(){
       alert('click!!!!');
    });
 });
+
 @endsection

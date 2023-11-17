@@ -79,8 +79,9 @@
             @yield('content')
         </main>
     </div>
-    <script type='text/javascript'>
-       @yield('scripts')
-    </script>
+<script src="{{ asset('jquery.js') }}"></script>
+        <script type="text/javascript">
+        @yield('scripts')
+        </script>
 </body>
 </html>
