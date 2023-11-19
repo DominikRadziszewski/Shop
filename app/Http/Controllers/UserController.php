@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
 class UserController extends Controller
 {
@@ -61,8 +62,13 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $flight = User::find( $id );
+ 
+        $flight->delete();   
+        return response()->json([
+            'status'=>'success'
+        ]);
     }
 }

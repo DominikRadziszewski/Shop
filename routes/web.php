@@ -23,3 +23,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/users/list', [UserController::class, 'index'])->middleware('auth');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->middleware('auth');

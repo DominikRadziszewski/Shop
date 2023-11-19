@@ -21,7 +21,7 @@
             <td>{{  $user -> surname  }}</td>
             <td>{{  $user -> phone_number  }}</td>
             <td>
-                <button class="btn btn-danger btn-sn">X</button>
+            <button class="btn btn-danger btn-sm delete" data-id="{{ $user -> id }}">X</button>
             </td>
          </tr>
     @endforeach
@@ -33,9 +33,17 @@
 @section('scripts')
 
 $(function(){
-  $("button").on("click",function(){
-      alert('click!!!!');
-   });
+ $(".delete").on("click",function(){ 
+      $.ajax({
+      method: "delete",
+      url: "http://localhost/CV/public/users/"+$(this).data("id"),
+      //data: { name: "John", location: "Boston" }
+      })
+      .done(function(response) {
+      location.reload();
+      alert("SUKCES");
+       });
+       });
 });
 
 @endsection
