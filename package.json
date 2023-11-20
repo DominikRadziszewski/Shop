@@ -14,5 +14,8 @@
         "laravel-vite-plugin": "^0.8.0",
         "sass": "^1.56.1",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "sweetalert2": "^11.6.13"
     }
 }
