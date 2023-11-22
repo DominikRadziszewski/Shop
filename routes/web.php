@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WelcomeController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/', [WelcomeController::class, 'index']);
 
 
 Auth::routes();
@@ -34,4 +36,6 @@ Route::post('/products', [ProductController::class, 'store'])->name('products.st
 Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit')->middleware('auth');
 Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.update')->middleware('auth');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy')->middleware('auth');
+
+
 
