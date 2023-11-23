@@ -69,15 +69,22 @@
                             <label for="image" class="col-md-4 col-form-label text-md-end">Grafika</label>
 
                             <div class="col-md-6">
-                                <input id="image" type="file" class="form-control" name="image">
-
+                                <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image">
+                               
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row mb-3 justify-content-center" >
                             <div class="col-md-6" >
+                                @if(!is_null($product->image_path))
                             <img src="{{ asset('storage/' . $product->image_path) }}" style="height: 240px; width: 240px;" class="img-fluid mx-auto d-block">
-                            </div>
+                                @endif    
+                        </div>
                         </div>
 
                         <div class="row mb-0">
