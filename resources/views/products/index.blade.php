@@ -17,10 +17,10 @@
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Nazwa</th>
-      <th scope="col">Opis</th>
-      <th scope="col">Ilość</th>
-      <th scope="col">Cena</th>
+      <th scope="col">{{__('shop.product.fields.name')}}</th>
+      <th scope="col">{{__('shop.product.fields.description')}}</th>
+      <th scope="col">{{__('shop.product.fields.amount')}}</th>
+      <th scope="col">{{__('shop.product.fields.price')}}</th>
       <th scope="col">Akcje</th>
     </tr>
   </thead>
@@ -51,6 +51,7 @@
 @endsection
 @section('scripts')
   const deleteUrl = "{{ url('products') }}/";
+  const confirmDelete= "{{ __('shop.messages.delete_confirm') }}";
 @endsection
 @section('js-files')
 @vite (['resources\js\delete.js'])

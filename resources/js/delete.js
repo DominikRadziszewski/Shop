@@ -1,7 +1,7 @@
 $(function(){
     $(".delete").on("click",function(){ 
       Swal.fire({
-        title: "Are you sure?",
+        title: confirmDelete,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -12,8 +12,7 @@ $(function(){
       if (result.isConfirmed) {
         $.ajax({
         method: "delete",
-        url: deleteUrl+$(this).data("id"),
-        data: { name: "John", location: "Boston" }
+        url: deleteUrl+$(this).data("id")
                 })
         .then(
           function(response) {
