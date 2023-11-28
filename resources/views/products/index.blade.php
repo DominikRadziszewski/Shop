@@ -21,6 +21,7 @@
       <th scope="col">{{__('shop.product.fields.description')}}</th>
       <th scope="col">{{__('shop.product.fields.amount')}}</th>
       <th scope="col">{{__('shop.product.fields.price')}}</th>
+      <th scope="col">{{__('shop.product.fields.category')}}</th>
       <th scope="col">Akcje</th>
     </tr>
   </thead>
@@ -31,7 +32,8 @@
             <td>{{  $product -> name  }}</td>
             <td>{{  $product -> description  }}</td>
             <td>{{  $product -> amount  }}</td>
-            <td>{{  $product -> price  }}</td>
+            <td>{{  $product -> price  }}</td> 
+            <td>@if(isset($product ->category)){{  $product ->category->name }} @endif</td>
             <td>
             <a href="{{route('products.show', $product->id)}}">
               <button class="btn btn-success btn-sm ">P</button>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpsertProductRequest;
+use App\Models\ProductCategory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use View;
@@ -26,7 +27,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view("products.create");
+        return view("products.create",[
+            "categories"=> ProductCategory::all()
+        ]);
     }
 
     /**
@@ -48,7 +51,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return view("products.show",
-        [ "product"=> $product
+        [ "product"=> $product,
+        "categories"=> ProductCategory::all()
+
     ]);
     }
 
@@ -58,7 +63,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return view("products.edit", [
-            "product"=> $product
+            "product"=> $product,
+            "categories"=> ProductCategory::all()
+
         ]);
     }
 

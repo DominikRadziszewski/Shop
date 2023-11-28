@@ -27,6 +27,7 @@ class UpsertProductRequest extends FormRequest
             'amount' => 'required|integer|min:0',
             'price' => 'required|numeric|between:0,9999999,99',
             'image'=> 'nullable|image|mimes:jpg,png',
+            'category_id'=> 'nullable|integer|min:0',
         ];
     }
 }
