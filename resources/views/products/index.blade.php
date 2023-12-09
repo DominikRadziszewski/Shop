@@ -1,13 +1,14 @@
 @extends('Layouts.app')
 @section('content')
 <div class="container">
+@include('helpers.flash-messages')
 <div class="row">
   <div class="col-6">
-    <h1>Lista produktów</h1>
+    <h1>{{ __('shop.product.index_title') }}</h1>
   </div>
   <div class="col-6">
-    <a class="float-right" href="{{ route('products.create')}}">
-    <button type="button" class="btn btn-primary">Dodaj</button>
+    <a class="float-right" href="{{ route('products.create') }}">
+    <button type="button" class="btn btn-primary">{{ __('shop.button.add') }}</button>
     </a>
   </div>
 

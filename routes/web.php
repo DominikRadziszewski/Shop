@@ -1,10 +1,12 @@
 <?php
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,19 +25,30 @@ Route::get('/', [WelcomeController::class, 'index']);
 
 
 Auth::routes();
+Route::get('/email/verify', function () {
+    return view('auth/verify');
+})->middleware(['auth'])->name('verification.notice');
 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::middleware(['auth','verified'])->group(function () {
+    Route::resource('products', ProductController::class);
+    
+Route::get('/users/list', [UserController::class, 'index']);
+Route::delete('/users/{user}', [UserController::class, 'destroy']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/users/list', [UserController::class, 'index'])->middleware('auth');
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('auth');
+});
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index')->middleware('auth');
-Route::get('/products/create', [ProductController::class, 'create'])->name('products.create')->middleware('auth');
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show')->middleware('auth');
-Route::post('/products', [ProductController::class, 'store'])->name('products.store')->middleware('auth');
-Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit')->middleware('auth');
-Route::post('/products/{product}', [ProductController::class, 'update'])->name('products.update')->middleware('auth');
-Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy')->middleware('auth');
+
 
 
 

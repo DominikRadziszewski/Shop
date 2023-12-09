@@ -1,6 +1,12 @@
 @extends('Layouts.app')
 @section('content')
 <div class="container">
+@include('helpers.flash-messages')
+<div class="row">
+  <div class="col-6">
+    <h1>{{ __('shop.user.index_title') }}</h1>
+  </div>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -32,6 +38,7 @@
 @endsection
 @section('scripts')
   const deleteUrl = "{{ url('users') }}/";
+  const confirmDelete= "{{ __('shop.messages.delete_confirm') }}";
 @endsection
 @section('js-files')
 @vite (['resources\js\delete.js'])

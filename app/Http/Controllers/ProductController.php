@@ -42,7 +42,7 @@ class ProductController extends Controller
             $product->image_path = $request->file('image')->store('products');
         }
         $product->save();
-        return redirect()->route("products.index")->with("success","");
+        return redirect()->route("products.index")->with('status', __('shop.product.status.store.success'));
     }
 
     /**
@@ -79,7 +79,7 @@ class ProductController extends Controller
             $product->image_path = $request->file('image')->store('products');
         }
         $product->save(); 
-        return redirect()->route("products.index")->with("success","");
+        return redirect()->route("products.index")->with('status', __('shop.product.status.update.success'));
     }
 
     /**
@@ -88,7 +88,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         try {
-            $product->delete();   
+            $product->delete(); 
+            session()->flash('status', __('shop.product.status.delete.success')) ;
             return response()->json([
                 'status'=>'success'
             ]);

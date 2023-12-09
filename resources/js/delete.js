@@ -17,11 +17,6 @@ $(function(){
         .then(
           function(response) {
             location.reload();
-            Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
-                    });
                             },
         function(jqXHR, textStatus, errorThrown) {
           var responseJSON = JSON.parse(jqXHR.responseText);

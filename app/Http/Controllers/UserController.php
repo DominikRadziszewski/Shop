@@ -66,7 +66,8 @@ class UserController extends Controller
     public function destroy(User $user)
     { 
        try {
-        $user->delete();   
+        $user->delete();
+        session()->flash('status', __('shop.user.status.delete.success')) ;   
         return response()->json([
             'status'=>'success'
         ]);
