@@ -4,7 +4,7 @@
 @include('helpers.flash-messages')
 <div class="row">
   <div class="col-6">
-    <h1>{{ __('shop.product.index_title') }}</h1>
+    <h1>{{ __('shop.product.index_title') }} <i class="fa-solid fa-list"></i></h1>
   </div>
   <div class="col-6">
     <a class="float-right" href="{{ route('products.create') }}">
@@ -37,12 +37,12 @@
             <td>@if(isset($product ->category)){{  $product ->category->name }} @endif</td>
             <td>
             <a href="{{route('products.show', $product->id)}}">
-              <button class="btn btn-success btn-sm ">P</button>
+              <button class="btn btn-success btn-sm "><i class="fa-solid fa-image"></i></button>
               </a>
               <a href="{{route('products.edit', $product->id)}}">
-              <button class="btn btn-primary btn-sm ">E</button>
+              <button class="btn btn-primary btn-sm "><i class="fa-solid fa-file-pen"></i></button>
               </a>
-            <button class="btn btn-danger btn-sm delete" data-id="{{ $product -> id }}">X</button>
+            <button class="btn btn-danger btn-sm delete" data-id="{{ $product -> id }}"><i class="fa-solid fa-trash"></i></button>
             </td>
          </tr>
     @endforeach
