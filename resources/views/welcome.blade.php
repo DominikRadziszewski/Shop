@@ -45,13 +45,17 @@
                                         </div>
                                         <div class="card-body text-center">
                                             <h4 class="card-title">
-                                                <a href="product.html" class=" font-weight-bold text-dark text-uppercase small">{{$product->name}}</a>
+                                                <a class=" font-weight-bold text-dark text-uppercase small">{{$product->name}}</a>
                                             </h4>
                                             <h5 class="card-price small text-warning">
                                                 <i>
                                                     {{$product->price}} PLN </i>
                                             </h5>
+                                                
                                         </div>
+                                        <button class="btn btn-success btn-sm add-cart-button" data-id= "{{ $product->id }}" @guest disabled @endguest ><i class="fa-solid fa-cart-plus"></i>
+                                         Dodaj do koszyka
+                                        </button>
                                     </div>
                                 </div>
                         @endforeach
@@ -104,10 +108,13 @@
                 </div>
         </div>
  @endsection
- @section ('scripts')
-    const storagePath ='{{ asset('storage') }}/';
-    const defaultImage='{{ $defaultImage }}';
- @endsection
+ @section('scripts')
+        const WELCOME_DATA = {
+            storagePath: '{{ asset('storage') }}/',
+            defaultImage: '{{ $defaultImage }}',
+            addToCart:'{{url('cart')}}/',
+        };
+@endsection
  @section ('js-files')
 
  @vite (['resources\js\welcome.js'])

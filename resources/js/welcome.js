@@ -11,6 +11,42 @@ $(function()
         getProducts($('a.products-actual-count').first().text());
      });
 
+     $('button.add-cart-button').on("click", function (event) {
+        event.preventDefault();
+    
+        $.ajax({
+            method: "POST",
+            url: WELCOME_DATA.addToCart + $(this).data('id'),
+        })
+            .done(function (response) {
+                Swal.fire({
+                    title: "Brawo",
+                    text:"Produkt został dodany do koszyka",
+                    icon: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: '<i class="fas fa-cart-plus"></i> Przejdz do koszyka',
+                    cancelButtonText: '<i class="fas fa-shopping-bag"></i> Kontunuj zakupy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        alert('ok');
+                    } 
+                });
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                var responseJSON = JSON.parse(jqXHR.responseText);
+                console.log(responseJSON.message);
+                Swal.fire({
+                    title: responseJSON.status,
+                    text: responseJSON.message,
+                    icon: "error",
+                });
+            });
+    });
+
+              
+
         function getProducts(paginate){
             const form =$('form.sidebar-filter').serialize();
         $.ajax({
@@ -34,7 +70,9 @@ $(function()
                                  '<h5 class="card-price small text-warning">'+
                                          '<i>PLN' +product.price +'</i>'+
                                              '</h5>'+
-                                     '</div>'+
+                                     '</div>'+'<button class="btn btn-success btn-sm add-cart-button" data-id='+ product.id +' ><i class="fa-solid fa-cart-plus"></i>'+
+                                     'Dodaj do koszyka'+
+                                    '</button>'+
                                  '</div>'+
                              '</div>';
                              $('div#products-wrapper').append(html);
@@ -49,9 +87,9 @@ $(function()
         function getImage(product){
             if(!!product.image_path)
             {
-                return storagePath+product.image_path;
+                return WELCOME_DATA.storagePath+product.image_path;
             }
-            return defaultImage
+            return WELCOME_DATA.defaultImage
         }
 });
 
