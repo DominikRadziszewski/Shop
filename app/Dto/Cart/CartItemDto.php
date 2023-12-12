@@ -63,12 +63,4 @@ class CartItemDto
     {
         $this->quantity += 1;
     }
-    public function incrementTotalQuantity(): void
-    {
-        $this->totalQuantity += 1;
-    }
-    public function incrementTotalSum(float $price): void
-    {
-        $this->totalSum += $price;
-    }
 }
