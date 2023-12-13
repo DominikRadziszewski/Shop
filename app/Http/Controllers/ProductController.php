@@ -6,8 +6,11 @@ use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpsertProductRequest;
 use App\Models\ProductCategory;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use View;
 
 class ProductController extends Controller
@@ -74,8 +77,12 @@ class ProductController extends Controller
      */
     public function update(UpsertProductRequest $request, Product $product):RedirectResponse
     {
+        $oldImage_path = $product->image_path;
         $product->fill($request->validated());
         if ($request->hasFile('image')) {
+            if(Storage::disk()->exists($oldImage_path)){
+                Storage::delete($oldImage_path);
+            }
             $product->image_path = $request->file('image')->store('products');
         }
         $product->save(); 
@@ -99,5 +106,12 @@ class ProductController extends Controller
                 'message'=> 'Wystąpił błąd!'
             ])->setStatusCode (500);
            }
+    }
+    public function donwloadImage(Product $product):RedirectResponse|StreamedResponse
+    {
+            if(Storage::disk()->exists($product->image_path)){
+                return Storage::download($product->image_path);
+            }
+        return Response::back();
     }
 }

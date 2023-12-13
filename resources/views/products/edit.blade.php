@@ -102,7 +102,9 @@
                         <div class="row mb-3 justify-content-center" >
                             <div class="col-md-6 justify-content-center" >
                                 @if(!is_null($product->image_path))
-                            <img src="{{ asset('storage/' . $product->image_path) }}" style="height: 240px; width: 240px;" class="img-fluid mx-auto d-block">
+                                <a href="{{  route('products.donwloadImage', $product->id)  }}">
+                                    <img src="{{ asset('storage/' . $product->image_path) }}" style="height: 240px; width: 240px;" class="img-fluid mx-auto d-block">
+                                </a>    
                                 @endif    
                         </div>
                         </div>

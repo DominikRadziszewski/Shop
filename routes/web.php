@@ -41,7 +41,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::middleware(['auth','verified'])->group(function () {
     Route::middleware(['can:isAdmin'])->group(function () {
-
+        Route::get('/products/{product}/donwload', [ProductController::class,'donwloadImage'])->name('products.donwloadImage');
         Route::resource('products', ProductController::class);
         Route::get('/users/list', [UserController::class, 'index']);
         Route::delete('/users/{user}', [UserController::class, 'destroy']);
