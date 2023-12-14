@@ -17,8 +17,9 @@ class CartController extends Controller
 
     public function index()
     {
-        dd(Session::get('cart',new Cart()));
-        return view('home');
+        return view('cart.index',[
+            'cart'=>Session::get('cart',new Cart())
+        ]);
     }
     /**
      * @param Product $product
@@ -31,5 +32,21 @@ class CartController extends Controller
         return response()->json([
             'status'=>'success'
         ]);   
+     }
+     public function destroy(Product $product)
+     {
+         try {
+            $cart = Session::get('cart',new Cart());
+            Session::put('cart' , $cart->removeItem($product));
+             session()->flash('status', __('shop.product.status.delete.success')) ;
+             return response()->json([
+                 'status'=>'success'
+             ]);
+            } catch (\Throwable $th) {
+             return response()->json([
+                 'status'=>'error',
+                 'message'=> 'Wystąpił błąd!'
+             ])->setStatusCode (500);
+            }
      }
 }

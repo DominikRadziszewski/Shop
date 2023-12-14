@@ -51,9 +51,9 @@ class CartItem
         return $this->price * $this->quantity;
     }
 
-    public function getImagePath(): ?string 
+    public function getImage(): ?string 
     {
-        return $this->imagePath;
+        return !is_null($this->imagePath) ? asset ("storage/". $this->imagePath) : config("shop.default.image");
     }
     public function addQuantity(Product $product): CartItem
     {

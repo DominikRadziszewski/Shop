@@ -14,6 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}">
 
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
  
@@ -62,6 +63,7 @@
                                 <a class="dropdown-item" href="users/list">{{ __('Useres') }}</a>
                                 <a class="dropdown-item" href="{{ route('products.index') }}">{{ __('Products') }}</a>
                                 @endcan
+                                <a class="dropdown-item" href="{{ route('cart.index') }}">{{ __('Koszyk') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

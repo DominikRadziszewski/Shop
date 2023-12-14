@@ -8,7 +8,8 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/js/delete.js',
-                'resoueces/js/welcome.js'
+                'resources/js/welcome.js',
+                'resources/css/cart.css',
             ],
             refresh: true,
         }),

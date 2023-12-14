@@ -30,8 +30,8 @@ $(function()
                     cancelButtonText: '<i class="fas fa-shopping-bag"></i> Kontunuj zakupy'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        alert('ok');
-                    } 
+                        window.location=WELCOME_DATA.listCart;                  
+                     } 
                 });
             })
             .fail(function (jqXHR, textStatus, errorThrown) {
@@ -70,7 +70,7 @@ $(function()
                                  '<h5 class="card-price small text-warning">'+
                                          '<i>PLN' +product.price +'</i>'+
                                              '</h5>'+
-                                     '</div>'+'<button class="btn btn-success btn-sm add-cart-button" data-id='+ product.id +' ><i class="fa-solid fa-cart-plus"></i>'+
+                                     '</div>'+'<button class="btn btn-success btn-sm add-cart-button"' + GetDisabled() + ' data-id= '+ product.id +' ><i class="fa-solid fa-cart-plus"></i>'+
                                      'Dodaj do koszyka'+
                                     '</button>'+
                                  '</div>'+
@@ -90,6 +90,12 @@ $(function()
                 return WELCOME_DATA.storagePath+product.image_path;
             }
             return WELCOME_DATA.defaultImage
+        }
+        function GetDisabled(){
+            if (WELCOME_DATA.isGuest){
+                return 'disabled';
+            }
+            return '';
         }
 });
 
