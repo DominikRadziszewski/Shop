@@ -26,9 +26,14 @@
             <td>{{  $user -> name  }}</td>
             <td>{{  $user -> surname  }}</td>
             <td>{{  $user -> phone_number  }}</td>
+            <td> <a href="{{ route ('users.edit', $user->id)}}">
+              <button class="btn btn-primary btn-sm "><i class="fa-solid fa-file-pen"></i></button>
+              </a>
+            </td>
             <td>
             <button class="btn btn-danger btn-sm delete" data-id="{{ $user -> id }}"><i class="fa-solid fa-trash"></i></button>
             </td>
+            
          </tr>
     @endforeach
   </tbody>

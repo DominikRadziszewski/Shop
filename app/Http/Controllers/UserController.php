@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\UpdateUserRequest;
 use Exception;
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame;
 
@@ -47,17 +49,29 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view("users.edit" , [
+            "user"=> $user
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * @param UpdateUserRequest $request
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $addressvalidated = $request->validated()['address'];
+        if($user->hasAdress()){
+            $address = $user->address;
+            $address->fill($addressvalidated);
+        }else{
+            $address=new Address($addressvalidated);
+        }
+
+        $user->address()->save($address);
+        return redirect()->route("users.index")->with('status', __('shop.product.status.update.success'));
     }
 
     /**
