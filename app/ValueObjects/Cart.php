@@ -20,11 +20,20 @@ class Cart
     {
         return $this->items;
     }
+    public function getEndQuantity() 
+    {
+        return $this->items->sum(function ($item) {
+            return $item->getQuantity();
+        });
+    }
     public function getSum(): float
     {
         return $this->items->sum(function ($item) {
             return $item->getPrice() * $item->getQuantity();
         });
+    }  public function hasItems(): bool
+    {
+        return $this->items->isNotEmpty();
     }
     public function addItem(Product $product): Cart
     {

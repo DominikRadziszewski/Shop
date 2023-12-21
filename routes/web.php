@@ -49,11 +49,16 @@ Route::middleware(['auth','verified'])->group(function () {
         Route::resource('users', UserController::class)->only([
             'index','edit','update','destroy'
         ]);
-});
-
     Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/{product}', [App\Http\Controllers\CartController::class, 'store'])->name('cart.store');
     Route::delete('/cart/{product}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+
+    Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+    Route::post('/orders', [App\Http\Controllers\OrderController::class, 'store'])->name('orders.store');
+
+});
+
+    
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     
 });

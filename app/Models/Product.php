@@ -28,5 +28,9 @@ class Product extends Model
     {
         return $this->hasCategory() && $this->category->id == $category_id;
     }
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
    
 }

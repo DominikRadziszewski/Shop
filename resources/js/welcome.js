@@ -1,5 +1,7 @@
 $(function()
 { 
+    var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
     $('div.products-count a').on("click",function(event){
         event.preventDefault();
         $('a.products-actual-count').text($(this).text());
@@ -17,6 +19,9 @@ $(function()
         $.ajax({
             method: "POST",
             url: WELCOME_DATA.addToCart + $(this).data('id'),
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            }
         })
             .done(function (response) {
                 Swal.fire({
@@ -52,7 +57,10 @@ $(function()
         $.ajax({
             method: "GET",
             url: "/",
-            data: form + "&" +$.param({paginate: paginate})
+            data: form + "&" +$.param({paginate: paginate}),
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            }
             })
             .done(function(response) {
                     $('div#products-wrapper').empty();
